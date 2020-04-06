@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if object_list.count == 0 %}
+<h3 class="red-text">There are no Consoles</h3>
+<a href="{% url 'consoles_create' %}">Add a Console</a>
+{% else %}
+{% for console in object_list %}
+<div class="card">
+    <a href="{% url 'consoles_detail' console.id %}">
+        <div class="card-content">
+            <span class="card-title">A <span class="{{console.color.lower}}-text">{{console.color}}</span>
+                {{ console.name }}</span>
+        </div>
+    </a>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

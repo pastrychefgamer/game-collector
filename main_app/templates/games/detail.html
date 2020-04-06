@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Game Details</h1>
+
+<div class="row">
+    <div class="card">
+        <div class="col s6">
+            <div class="card-content">
+                <span class="card-title">{{ game.name}}</span>
+                <p>Genre: {{ game.genre}}</p>
+                <p>Description: {{ game.description }}</p>
+                <p>Rating: {{ game.rating }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'games_update' game.id %}">Edit</a>
+                <a href="{% url 'games_delete' game.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+    <div class="col s6">
+        <form action="{% url 'add_outcome' game.id %}" method="post">
+            {% csrf_token %}
+            {{ outcome_form }}
+            <input type="submit" class="btn" value="Add Play time">
+        </form>
+        <br>
+        {% if game.played_for_today %}
+        <div class="card-panel teal-text center-align">{{game.name}} has been played today</div>
+        {% else %}
+        <div class="card-panel red-text center-align">{{game.name}} might want to be played</div>
+        {% endif %}
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Play Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for outcome in game.outcome_set.all %}
+                <tr>
+                    <td>{{outcome.date}}</td>
+                    <td>{{outcome.get_playTime_display}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{ game.name }}'s Consoles</h3>
+        {% if game.consoles.count %}
+        {% for console in game.consoles.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    A <span style="color: {{ console.color }}">{{ console.color }}</span> {{ console.name }}
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'unassoc_console' game.id console.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>No Consoles :(</h5>{% endif %}
+    </div>
+    <!-- Available consoles will come after this line -->
+    <div class="col s6">
+        <h3>Available Consoles</h3>
+        {% if consoles.count %}
+        {% for console in consoles.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    A <span style="color: {{ console.color }}">{{ console.color }}</span> {{ console.name }}
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_console' game.id console.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{game.name}} Already Has All Consoles Available</h5>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    let dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    let selectEl = document.getElementById('id_playTime');
+    M.FormSelect.init(selectEl);
+</script>
+
+{% endblock %}
