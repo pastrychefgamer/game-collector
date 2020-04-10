@@ -20,7 +20,7 @@ Welcome to Game Collector!!  The place where you can catalog all of your games o
 ## Getting Started
 Click the link below to visit the site.  You will need to signup, if you are a new user, or login if you already have an account.  Click One of the many menu items to start creating your personal game catalog.
 
-https://git.heroku.com/gamecollector-wea.git
+https://gamecollector-wea.herokuapp.com
 
 ## Future Enhancements
 - AWS S3 buket setup so you can upload screenshots of your favorite games
