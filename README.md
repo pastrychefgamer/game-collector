@@ -1,11 +1,14 @@
 # Game Collector
-![bucket](https://user-images.githubusercontent.com/52508868/76150008-a896ce00-605a-11ea-9cd4-c170a24c661c.jpeg)
 
 ## Introduction
 Welcome to Game Collector!!  The place where you can catalog all of your games on any platform in one place.
 
 ## Screenshot(s)
-Coming soon!
+![Screen Shot 2020-04-10 at 1 03 33 PM](https://user-images.githubusercontent.com/52508868/79019701-cceb3c00-7b2b-11ea-9f88-8e914c35d998.png)
+
+![Screen Shot 2020-04-10 at 1 00 33 PM](https://user-images.githubusercontent.com/52508868/79019734-da082b00-7b2b-11ea-930d-da3166e9b163.png)
+
+![Screen Shot 2020-04-10 at 12 57 18 PM](https://user-images.githubusercontent.com/52508868/79019762-e8eedd80-7b2b-11ea-9320-fcef50eb3505.png)
 
 ## Technologies Used
 - Python
